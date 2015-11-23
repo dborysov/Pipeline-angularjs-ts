@@ -1,9 +1,9 @@
 'use strict';
 
-var path = require('path'),
+const path = require('path'),
     gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
-    babel = require('gulp-babel'),
+    ts = require('gulp-typescript'),
     ngAnnotate = require('gulp-ng-annotate'),
     bower = require('gulp-bower'),
     concat = require('gulp-concat'),
@@ -11,17 +11,11 @@ var path = require('path'),
     sass = require('gulp-sass'),
     inject = require('gulp-inject');
 
-var src = {
+const src = {
     js: {
         libs: [
-            './node_modules/babel-es6-polyfill/browser-polyfill.js',
             './bower_components/angular/angular.min.js',
             './bower_components/angular-ui-router/release/angular-ui-router.min.js'
-        ],
-        custom: [
-            './app/main.js',
-            './app/Services/*.js',
-            './app/Controllers/*.js'
         ]
     },
     css: {
@@ -48,23 +42,26 @@ gulp.task('copy-libs', () => gulp.src(src.js.libs).pipe(gulp.dest(dest)));
 
 gulp.task('compile-css', () => gulp.src(src.sass.custom).pipe(sass()).pipe(gulp.dest(path.join(dest, '/css'))));
 
-gulp.task('compile-js', () =>
-    gulp.src(src.js.custom)
+gulp.task('compile-js', () => {
+    const tsProject = ts.createProject('tsconfig.json');
+
+    return tsProject.src()
         .pipe(sourcemaps.init())
-        .pipe(babel( {presets: ['es2015']} ))
+        .pipe(ts(tsProject))
         .pipe(ngAnnotate())
-        .pipe(uglify())
         .pipe(concat('all.js'))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest(dest)));
+        .pipe(uglify())
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest(dest));
+});
 
 gulp.task('default', ['copy-html', 'bower-install', 'compile-js', 'compile-css'], () => {
     var sourceFiles = gulp.src(src.js.libs
-                                     .concat([path.join(dest, 'all.js')])
-                                     .concat(src.css.libs)
-                                     .concat([path.join(dest, 'css', '*.css')]), { read: false });
+        .concat([path.join(dest, 'all.js')])
+        .concat(src.css.libs)
+        .concat([path.join(dest, 'css', '*.css')]), { read: false });
 
     return gulp.src(src.html.main)
-               .pipe(inject(sourceFiles))
-               .pipe(gulp.dest(dest))
+        .pipe(inject(sourceFiles))
+        .pipe(gulp.dest(dest))
 });
