@@ -1,0 +1,22 @@
+{
+  "name": "Levi9-pipeline-angularjs",
+  "homepage": "https://github.com/dborysov/Levi9-pipeline-angularjs",
+  "description": "",
+  "main": "",
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "3.3.5",
+    "angular": "1.4.7",
+    "angular-ui-router": "0.2.15"
+  }
+}
