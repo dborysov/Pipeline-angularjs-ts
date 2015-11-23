@@ -2,7 +2,7 @@ module app.controllers {
     'use strict';
 
     import IGitService = app.services.IGitService;
-    import GitAccount = app.services.GitAccount;
+    import GitAccount = app.models.GitAccount;
 
     class Main{
         private results: GitAccount[];
@@ -10,7 +10,7 @@ module app.controllers {
         /* @ngInject */
         constructor(private gitService: IGitService){
             gitService.getGitAccounts()
-                      .then(results => { this.results = results; });}
+                      .then((results: GitAccount[]) => { this.results = results; });}
     }
 
     angular.module('app').controller('Main', Main);

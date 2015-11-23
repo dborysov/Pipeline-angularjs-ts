@@ -2,7 +2,7 @@ module app.controllers {
     'use strict';
 
     import IGitService = app.services.IGitService;
-    import GitAccount = app.services.GitAccount;
+    import GitAccount = app.models.GitAccount;
 
     class AccountDetails{
         private account: GitAccount;
@@ -10,7 +10,7 @@ module app.controllers {
         /* @ngInject */
         constructor($stateParams: ng.ui.IStateParamsService, gitService: IGitService){
             gitService.getGitAccount($stateParams['login'])
-                      .then(a => this.account = a);
+                      .then((a: GitAccount) => this.account = a);
         }
     }
 
