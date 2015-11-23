@@ -1,6 +1,7 @@
 #Lab (educational app)
 
 ##Technologies used:
+- Typescript
 - Angular 1.4.7
 - Angular UI Router
 - Bootstrap
@@ -13,7 +14,7 @@
   - Uglify
   - Sass
   - Inject
-  
+
 ##App description
 Application shows GitHub users on the main page and specific user data if you choose in the list or visit `/accounts/_login` url.
 
