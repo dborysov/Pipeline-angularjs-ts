@@ -1,13 +1,17 @@
-(() => {
+module app.controllers {
     'use strict';
 
-    angular.module('app').controller('Main', Main);
+    import IGitService = app.services.IGitService;
+    import GitAccount = app.services.GitAccount;
 
-    /* @ngInject */
-    function Main(GitService) {
-        const vm = this;
+    class Main{
+        private results: GitAccount[];
 
-        GitService.getGitAccounts()
-                  .then(results => { vm.results = results; });
+        /* @ngInject */
+        constructor(private gitService: IGitService){
+            gitService.getGitAccounts()
+                      .then(results => { this.results = results; });}
     }
-})();
+
+    angular.module('app').controller('Main', Main);
+}

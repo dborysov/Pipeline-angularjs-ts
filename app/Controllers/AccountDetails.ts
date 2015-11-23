@@ -1,13 +1,19 @@
-(() => {
+module app.controllers {
     'use strict';
 
-    angular.module('app').controller('AccountDetails', AccountDetails);
+    import IGitService = app.services.IGitService;
+    import GitAccount = app.services.GitAccount;
 
-    /* @ngInject */
-    function AccountDetails($stateParams, GitService) {
-        const vm = this;
+    class AccountDetails{
+        private account: GitAccount;
 
-        GitService.getGitAccount($stateParams.login)
-                  .then(a => vm.account = a);
+        /* @ngInject */
+        constructor($stateParams: ng.ui.IStateParamsService, gitService: IGitService){
+            gitService.getGitAccount($stateParams['login'])
+                      .then(a => this.account = a);
+        }
     }
-})();
+
+    angular.module('app')
+           .controller('AccountDetails', AccountDetails);
+}

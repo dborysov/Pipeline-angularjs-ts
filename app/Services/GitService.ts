@@ -1,15 +1,26 @@
-(() => {
+module app.services {
     'use strict';
 
-    angular.module('app').service('GitService', GitService);
-
-    /* @ngInject */
-    function GitService($http, $q) {
-        const vm = this,
-              url = 'https://api.github.com/users';
-
-        vm.getGitAccounts = () => $http.get(url).then(response => response.data);
-
-        vm.getGitAccount = login => $http.get(`${url}/${login}`).then(response => response.data);
+    export interface IGitService {
+        getGitAccounts(): ng.IPromise<GitAccount[]>;
+        getGitAccount(login: string): ng.IPromise<GitAccount>;
     }
-})();
+
+    export class GitAccount { }
+
+    export class GitService implements IGitService {
+        constructor(private $http: ng.IHttpService, private $q: ng.IQService) { }
+        private url: string = 'https://api.github.com/users';
+
+        getGitAccounts(): ng.IPromise<GitAccount[]> {
+            return this.$http.get(this.url).then(response => <GitAccount[]>response.data);
+        }
+
+        getGitAccount(login: string): ng.IPromise<GitAccount> {
+            return this.$http.get(`${this.url}/${login}`).then(response => <GitAccount>response.data);
+        }
+    }
+
+    angular.module('app')
+           .service('gitService', GitService);
+}
