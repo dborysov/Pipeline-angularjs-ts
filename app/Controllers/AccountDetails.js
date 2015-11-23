@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('app').controller('AccountDetails', AccountDetails);
-	
+
     /* @ngInject */
     function AccountDetails($stateParams, GitService) {
         const vm = this;

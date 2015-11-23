@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('app').service('GitService', GitService);
-	
+
     /* @ngInject */
     function GitService($http, $q) {
         const vm = this,
