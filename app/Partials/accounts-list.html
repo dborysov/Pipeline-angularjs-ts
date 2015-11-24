@@ -5,7 +5,7 @@
             <th>Login</th>
         </tr>
     </thead>
-    <tbody>{{vm.results}}
+    <tbody>
         <tr ng-repeat="result in vm.results" ui-sref="index.details(result)">
             <td><img width="50" ng-src="{{:: result.AvatarUrl}}" alt="avatar"></td>
             <td>{{::result.Login}}</td>
