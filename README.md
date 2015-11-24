@@ -2,6 +2,7 @@
 
 ##Technologies used:
 - Typescript
+- TSD
 - Angular 1.4.7
 - Angular UI Router
 - Bootstrap
