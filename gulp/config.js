@@ -1,32 +1,32 @@
 'use strict';
 
-const dest = './dist',
-      src = './app';
+const dest = 'dist',
+      src = 'app',
+      bower = 'bower_components';
 
 module.exports = {
     src: {
         ts: {
             customMainFiles: [
-                './app/main.ts',
-                './app/controllers/*.ts',
-                './app/services/*.ts'
+                `./${src}/main.ts`,
+                `./${src}/{controllers,services}/${'*.ts'}`
             ]
         },
         js: {
             libs: [
-                './bower_components/angular/angular.min.js',
-                './bower_components/angular-ui-router/release/angular-ui-router.min.js'
+                `./${bower}/angular/angular.min.js`,
+                `./${bower}/angular-ui-router/release/angular-ui-router.min.js`
             ]
         },
         css: {
-            libs: ['./bower_components/bootstrap/dist/css/bootstrap.min.css'],
+            libs: [`./${bower}/bootstrap/dist/css/bootstrap.min.css`],
         },
         sass: {
-            custom: ['./app/Content/Sass/+(*.sass|*.scss)']
+            custom: [`./${src}/Content/Sass/+(*.sass|*.scss)`]
         },
         html: {
-            main: './app/index.html',
-            partials: ['./app/partials/*.html']
+            main: `./${src}/index.html`,
+            partials: [`./${src}/partials/${'*.html'}`]
         }
     },
     baseDir: {dest, src}

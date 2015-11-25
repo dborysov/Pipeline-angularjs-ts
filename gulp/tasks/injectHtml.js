@@ -8,7 +8,7 @@ const gulp = require('gulp'),
 gulp.task('inject-html', ['bower-install', 'compile-js', 'compile-css', 'compile-templates', 'copy-libs'], () => {
     var sourceFiles = gulp.src(config.src.js.libs.concat(config.src.css.libs).map(path => path.replace('./bower_components/', `${config.baseDir.dest}/libs/`))
                           .concat(path.join(config.baseDir.dest, 'all.js'))
-                          .concat(path.join(config.baseDir.dest, 'template', 'templates.js'))
+                          .concat(path.join(config.baseDir.dest, 'templates.js'))
                           .concat(path.join(config.baseDir.dest, 'css', '*.css')), { read: false });
 
     return gulp.src(config.src.html.main)

@@ -7,7 +7,7 @@ const gulp = require('gulp'),
 gulp.task('compile-templates', () => {
     const options = {
         moduleName: 'app',
-        output: 'template/templates.js',
+        output: 'templates.js',
         strip: 'partials'
     };
 

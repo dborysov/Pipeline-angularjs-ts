@@ -5,4 +5,7 @@ const gulp = require('gulp'),
       sass = require('gulp-sass'),
       config = require('../../config');
 
-gulp.task('compile-css', () => gulp.src(config.src.sass.custom).pipe(sass()).pipe(gulp.dest(path.join(config.baseDir.dest, '/css'))));
+gulp.task('compile-css', () =>
+    gulp.src(config.src.sass.custom)
+        .pipe(sass())
+        .pipe(gulp.dest(path.join(config.baseDir.dest, 'css'))));
