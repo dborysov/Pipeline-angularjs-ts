@@ -50,6 +50,10 @@ const baseDir = {
         },
         taskConfigs: {
             compileTemplates: {
+                minify: {
+                        collapseWhitespace: true,
+                        removeAttributeQuotes: true
+                    },
                 moduleName: moduleNames.app,
                 output: fileNames.templatesJs,
                 strip: folderNames.partials
