@@ -3,7 +3,7 @@
 import {IGitService} from '../services/GitService';
 import {GitAccount} from '../models/GitAccount';
 
-export class AccountDetails {
+class AccountDetails {
     private account: GitAccount;
 
     /* @ngInject */
@@ -12,3 +12,5 @@ export class AccountDetails {
                   .then(a => this.account = a);
     }
 }
+
+angular.module('app').controller('AccountDetails', AccountDetails);

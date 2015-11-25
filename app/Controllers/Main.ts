@@ -1,7 +1,7 @@
 import {IGitService} from '../services/GitService';
 import {GitAccount} from '../models/GitAccount';
 
-export class Main {
+class Main {
     private results: GitAccount[];
 
     /* @ngInject */
@@ -10,3 +10,5 @@ export class Main {
                   .then(results => { this.results = results; });
     }
 }
+
+angular.module('app').controller('Main', Main);

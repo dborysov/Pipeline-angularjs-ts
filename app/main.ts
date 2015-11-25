@@ -1,9 +1,6 @@
 /// <reference path="../typings/angularjs/angular" />
 /// <reference path="../typings/angular-ui-router/angular-ui-router" />
 
-import {Main} from './controllers/main';
-import {AccountDetails} from './controllers/accountdetails';
-
 class Config {
 
     /* @ngInject */
@@ -14,7 +11,7 @@ class Config {
             .state('index', {
                 url: '',
                 abstract: true,
-                controller: Main,
+                controller: 'Main',
                 controllerAs: 'vm',
                 template: '<ui-view/>'
             })
@@ -25,11 +22,10 @@ class Config {
             .state('index.details', {
                 url: '/accounts/:login',
                 templateUrl: 'partials/accounts-details.html',
-                controller: AccountDetails,
+                controller: 'AccountDetails',
                 controllerAs: 'vm'
             })
     }
 }
 
 angular.module('app', ['ui.router']).config(Config);
-    

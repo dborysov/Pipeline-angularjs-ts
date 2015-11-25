@@ -1,12 +1,13 @@
 'use strict';
 
 const path = require('path'),
+    glob = require('glob'),
     gulp = require('gulp'),
     browserify = require('browserify'),
     tsify = require('tsify'),
     source = require('vinyl-source-stream'),
+    streamify = require('gulp-streamify'),
     sourcemaps = require('gulp-sourcemaps'),
-    ts = require('gulp-typescript'),
     ngAnnotate = require('gulp-ng-annotate'),
     bower = require('gulp-bower'),
     concat = require('gulp-concat'),
@@ -15,6 +16,13 @@ const path = require('path'),
     inject = require('gulp-inject');
 
 const src = {
+    ts: {
+        customMainFiles: [
+            './app/main.ts',
+            './app/controllers/*.ts',
+            './app/services/*.ts'
+        ]
+    },
     js: {
         libs: [
             './bower_components/angular/angular.min.js',
@@ -45,14 +53,21 @@ gulp.task('copy-libs', () => gulp.src(src.js.libs).pipe(gulp.dest(dest)));
 
 gulp.task('compile-css', () => gulp.src(src.sass.custom).pipe(sass()).pipe(gulp.dest(path.join(dest, '/css'))));
 
-gulp.task('compile-js', () =>
-    browserify()
-        .add(['app/main.ts', 'app/services/gitservice.ts'])
+gulp.task('compile-js', () => {
+    const filesToInject = src.ts.customMainFiles
+                                .reduce((prev, cur) => prev.concat(glob.sync(cur)), []);
+
+    return browserify({debug: true})
+        .add(filesToInject)
         .plugin(tsify)
         .bundle()
         .pipe(source('all.js'))
+        .pipe(streamify(sourcemaps.init({loadMaps: true})))
+        .pipe(ngAnnotate())
+        .pipe(streamify(uglify()))
+        .pipe(streamify(sourcemaps.write('.')))
         .pipe(gulp.dest(dest))
-    );
+    });
 
 gulp.task('default', ['copy-html', 'bower-install', 'compile-js', 'compile-css'], () => {
     var sourceFiles = gulp.src(src.js.libs
