@@ -7,10 +7,9 @@
 - Bootstrap
 - Some stuff, automated via `gulp`
   - Sourcemaps
-  - Babel
+  - Browserify (+tsify)
   - NgAnnotate
   - Bower
-  - Concat
   - Uglify
   - Sass
   - Inject

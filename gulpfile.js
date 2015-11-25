@@ -39,7 +39,7 @@ const src = {
         partials: ['./app/partials/*.html']
     }
 },
-    dest = './dest';
+    dest = './dist';
 
 gulp.task('bower-install', () => bower());
 
@@ -65,7 +65,7 @@ gulp.task('compile-js', () => {
         .pipe(gulp.dest(dest))
     });
 
-gulp.task('default', ['copy-html', 'bower-install', 'compile-js', 'compile-css'], () => {
+gulp.task('inject-html', ['copy-html', 'bower-install', 'compile-js', 'compile-css'], () => {
     var sourceFiles = gulp.src(src.js.libs
                             .concat([path.join(dest, 'all.js')])
                             .concat(src.css.libs)
@@ -74,4 +74,6 @@ gulp.task('default', ['copy-html', 'bower-install', 'compile-js', 'compile-css']
     return gulp.src(src.html.main)
         .pipe(inject(sourceFiles))
         .pipe(gulp.dest(dest))
-});
+})
+
+gulp.task('default', ['inject-html']);
