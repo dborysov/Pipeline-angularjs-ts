@@ -8,4 +8,4 @@ const gulp = require('gulp'),
 gulp.task('compile-css', () =>
     gulp.src(config.src.sass.custom)
         .pipe(sass())
-        .pipe(gulp.dest(path.join(config.baseDir.dest, 'css'))));
+        .pipe(gulp.dest(path.join(config.baseDir.dest, config.folderNames.outputCss))));

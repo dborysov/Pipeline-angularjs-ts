@@ -1,33 +1,58 @@
 'use strict';
 
-const dest = 'dist',
-      src = 'app',
-      bower = 'bower_components';
-
-module.exports = {
-    src: {
-        ts: {
-            customMainFiles: [
-                `./${src}/main.ts`,
-                `./${src}/{controllers,services}/${'*.ts'}`
-            ]
-        },
-        js: {
-            libs: [
-                `./${bower}/angular/angular.min.js`,
-                `./${bower}/angular-ui-router/release/angular-ui-router.min.js`
-            ]
-        },
-        css: {
-            libs: [`./${bower}/bootstrap/dist/css/bootstrap.min.css`],
-        },
-        sass: {
-            custom: [`./${src}/Content/Sass/+(*.sass|*.scss)`]
-        },
-        html: {
-            main: `./${src}/index.html`,
-            partials: [`./${src}/partials/${'*.html'}`]
-        }
+const baseDir = {
+        dest: 'dist',
+        src: 'app'
     },
-    baseDir: {dest, src}
-};
+    folderNames = {
+        bower: 'bower_components',
+        outputCss: 'css',
+        outputLibs: 'libs',
+        partials: 'partials'
+    },
+    fileNames = {
+        outputJs: 'all.js',
+        templatesJs: 'templates.js',
+        indexHtml: 'index.html'
+    },
+    moduleNames = {
+        app: 'app'
+    };
+
+    module.exports = {
+        baseDir,
+        folderNames,
+        fileNames,
+        moduleNames,
+        src: {
+            ts: {
+                customMainFiles: [
+                    `./${baseDir.src}/main.ts`,
+                    `./${baseDir.src}/{controllers,services}/${'*.ts'}`
+                ]
+            },
+            js: {
+                libs: [
+                    'angular/angular.min.js',
+                    'angular-ui-router/release/angular-ui-router.min.js'
+                ]
+            },
+            css: {
+                libs: ['bootstrap/dist/css/bootstrap.min.css'],
+            },
+            sass: {
+                custom: [`./${baseDir.src}/Content/Sass/+(*.sass|*.scss)`]
+            },
+            html: {
+                main: `./${baseDir.src}/index.html`,
+                partials: [`./${baseDir.src}/${folderNames.partials}/${'*.html'}`]
+            }
+        },
+        taskConfigs: {
+            compileTemplates: {
+                moduleName: moduleNames.app,
+                output: fileNames.templatesJs,
+                strip: folderNames.partials
+            }
+        }
+    };

@@ -1,8 +1,16 @@
 'use strict';
 
 const gulp = require('gulp'),
-      requireDir = require('require-dir');
+      path = require('path'),
+      requireDir = require('require-dir'),
+      del = require('del'),
+      config = require('./gulp/config');
 
 requireDir('./gulp/tasks', {recurse: true});
 
-gulp.task('default', ['inject-html']);
+gulp.task('default', ['inject-html'], () =>
+    del([
+        path.join(config.baseDir.dest, '**', '*'),
+        `!${path.join(config.baseDir.dest, config.fileNames.indexHtml)}`
+    ])
+);
