@@ -13,6 +13,7 @@
   - Uglify
   - Sass
   - Inject
+  - TemplateCache
 
 ##App description
 Application shows GitHub users on the main page and specific user data if you choose in the list or visit `/accounts/_login` url.
@@ -22,5 +23,4 @@ Application shows GitHub users on the main page and specific user data if you ch
 1. Download it to your local environment;
 2. Install npm;
 3. Run `npm install` and `gulp` in the root of application;
-4. Host the root of application in web server;
-5. Open `<app_address>/dist` in the browser.
+4. Open `<app_folder>/dist/index.html` in a browser.

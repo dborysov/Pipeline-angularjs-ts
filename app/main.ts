@@ -17,11 +17,11 @@ class Config {
             })
             .state('index.accounts', {
                 url: '/accounts',
-                templateUrl: 'partials/accounts-list.html'
+                templateProvider: /* @ngInject */ $templateCache => $templateCache.get('/accounts-list.html')
             })
             .state('index.details', {
                 url: '/accounts/:login',
-                templateUrl: 'partials/accounts-details.html',
+                templateProvider: /* @ngInject */ $templateCache => $templateCache.get('/accounts-details.html'),
                 controller: 'AccountDetails',
                 controllerAs: 'vm'
             })

@@ -12,6 +12,7 @@ const path = require('path'),
       bower = require('gulp-bower'),
       uglify = require('gulp-uglify'),
       sass = require('gulp-sass'),
+      templateCache = require('gulp-templatecache'),
       inject = require('gulp-inject');
 
 const src = {
@@ -39,13 +40,11 @@ const src = {
         partials: ['./app/partials/*.html']
     }
 },
-    dest = './dist';
+    dest = 'dist';
 
 gulp.task('bower-install', () => bower());
 
-gulp.task('copy-html', () => gulp.src(src.html.partials).pipe(gulp.dest(path.join(dest, '/partials'))));
-
-gulp.task('copy-libs', () => gulp.src(src.js.libs).pipe(gulp.dest(dest)));
+gulp.task('copy-libs', () => gulp.src(src.js.libs.concat(src.css.libs), {base: 'bower_components'}).pipe(gulp.dest(path.join(dest, 'libs'))));
 
 gulp.task('compile-css', () => gulp.src(src.sass.custom).pipe(sass()).pipe(gulp.dest(path.join(dest, '/css'))));
 
@@ -65,15 +64,27 @@ gulp.task('compile-js', () => {
         .pipe(gulp.dest(dest))
     });
 
-gulp.task('inject-html', ['copy-html', 'bower-install', 'compile-js', 'compile-css'], () => {
-    var sourceFiles = gulp.src(src.js.libs
-                            .concat([path.join(dest, 'all.js')])
-                            .concat(src.css.libs)
-                            .concat([path.join(dest, 'css', '*.css')]), { read: false });
+gulp.task('compile-templates', () => {
+    const options = {
+        moduleName: 'app',
+        output: 'template/templates.js',
+        strip: 'partials'
+    };
+
+    return gulp.src(src.html.partials)
+               .pipe(templateCache(options))
+               .pipe(gulp.dest(dest));
+});
+
+gulp.task('inject-html', ['bower-install', 'compile-js', 'compile-css', 'compile-templates', 'copy-libs'], () => {
+    var sourceFiles = gulp.src(src.js.libs.concat(src.css.libs).map(path => path.replace('./bower_components/', `${dest}/libs/`))
+                          .concat(path.join(dest, 'all.js'))
+                          .concat(path.join(dest, 'template', 'templates.js'))
+                          .concat(path.join(dest, 'css', '*.css')), { read: false });
 
     return gulp.src(src.html.main)
-        .pipe(inject(sourceFiles))
-        .pipe(gulp.dest(dest))
-})
+               .pipe(inject(sourceFiles, {ignorePath: `../${dest}`, relative: true}))
+               .pipe(gulp.dest(dest))
+});
 
 gulp.task('default', ['inject-html']);
