@@ -1,17 +1,12 @@
-module app.controllers {
-    'use strict';
+import {IGitService} from '../services/GitService';
+import {GitAccount} from '../models/GitAccount';
 
-    import IGitService = app.services.IGitService;
-    import GitAccount = app.models.GitAccount;
+export class Main {
+    private results: GitAccount[];
 
-    class Main{
-        private results: GitAccount[];
-
-        /* @ngInject */
-        constructor(private gitService: IGitService){
-            gitService.getGitAccounts()
-                      .then((results: GitAccount[]) => { this.results = results; });}
+    /* @ngInject */
+    constructor(private gitService: IGitService) {
+        gitService.getGitAccounts()
+                  .then(results => { this.results = results; });
     }
-
-    angular.module('app').controller('Main', Main);
 }

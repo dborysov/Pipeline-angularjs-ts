@@ -1,30 +1,35 @@
-module app {
-    'use strict';
+/// <reference path="../typings/angularjs/angular" />
+/// <reference path="../typings/angular-ui-router/angular-ui-router" />
 
-    class Config {
-        
-        /* @ngInject */
-        constructor($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
-            $urlRouterProvider.otherwise('/accounts');
+import {Main} from './controllers/main';
+import {AccountDetails} from './controllers/accountdetails';
 
-            $stateProvider
-                .state('index', {
-                    url: '',
-                    abstract: true,
-                    controller: 'Main as vm',
-                    template: '<ui-view/>'
-                })
-                .state('index.accounts', {
-                    url: '/accounts',
-                    templateUrl: 'partials/accounts-list.html'
-                })
-                .state('index.details', {
-                    url: '/accounts/:login',
-                    templateUrl: 'partials/accounts-details.html',
-                    controller: 'AccountDetails as vm'
-                })
-        }
+class Config {
+
+    /* @ngInject */
+    constructor($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
+        $urlRouterProvider.otherwise('/accounts');
+
+        $stateProvider
+            .state('index', {
+                url: '',
+                abstract: true,
+                controller: Main,
+                controllerAs: 'vm',
+                template: '<ui-view/>'
+            })
+            .state('index.accounts', {
+                url: '/accounts',
+                templateUrl: 'partials/accounts-list.html'
+            })
+            .state('index.details', {
+                url: '/accounts/:login',
+                templateUrl: 'partials/accounts-details.html',
+                controller: AccountDetails,
+                controllerAs: 'vm'
+            })
     }
-
-    angular.module('app', ['ui.router']).config(Config);
 }
+
+angular.module('app', ['ui.router']).config(Config);
+    

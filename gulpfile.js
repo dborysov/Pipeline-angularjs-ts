@@ -2,6 +2,9 @@
 
 const path = require('path'),
     gulp = require('gulp'),
+    browserify = require('browserify'),
+    tsify = require('tsify'),
+    source = require('vinyl-source-stream'),
     sourcemaps = require('gulp-sourcemaps'),
     ts = require('gulp-typescript'),
     ngAnnotate = require('gulp-ng-annotate'),
@@ -42,18 +45,14 @@ gulp.task('copy-libs', () => gulp.src(src.js.libs).pipe(gulp.dest(dest)));
 
 gulp.task('compile-css', () => gulp.src(src.sass.custom).pipe(sass()).pipe(gulp.dest(path.join(dest, '/css'))));
 
-gulp.task('compile-js', () => {
-    const tsProject = ts.createProject('tsconfig.json');
-
-    return tsProject.src()
-        .pipe(sourcemaps.init())
-        .pipe(ts(tsProject))
-        .pipe(ngAnnotate())
-        .pipe(concat('all.js'))
-        .pipe(uglify())
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(dest));
-});
+gulp.task('compile-js', () =>
+    browserify()
+        .add(['app/main.ts', 'app/services/gitservice.ts'])
+        .plugin(tsify)
+        .bundle()
+        .pipe(source('all.js'))
+        .pipe(gulp.dest(dest))
+    );
 
 gulp.task('default', ['copy-html', 'bower-install', 'compile-js', 'compile-css'], () => {
     var sourceFiles = gulp.src(src.js.libs

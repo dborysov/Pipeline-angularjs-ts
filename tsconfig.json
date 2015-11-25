@@ -1,10 +1,8 @@
 {
     "compilerOptions": {
+        "target": "ES5",
         "module": "commonjs",
-        "target": "es5",
-        "noImplicitAny": false,
-        "rootDir": ".",
-        "sortOutput": true
+        "noImplicitAny": false
     },
     "exclude": [
         "node_modules",

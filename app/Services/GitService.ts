@@ -1,49 +1,44 @@
-module app.services {
-    'use strict';
+/// <reference path="../../typings/angularjs/angular" />
 
-    import GitAccount = app.models.GitAccount;
+import {GitAccount} from '../models/GitAccount';
 
-    export interface IGitService {
-        getGitAccounts(): ng.IPromise<GitAccount[]>;
-        getGitAccount(login: string): ng.IPromise<GitAccount>;
-    }
-
-    interface IGitAccountResponseModel {
-        login: string,
-        email: string,
-        html_url: string,
-        avatar_url: string,
-        bio: string
-    }
-
-    class GitService implements IGitService {
-
-        /* @ngInject */
-        constructor(private $http: ng.IHttpService, private $q: ng.IQService) { }
-
-        private url: string = 'https://api.github.com/users';
-
-        getGitAccounts(): ng.IPromise<GitAccount[]> {
-            return this.$http.get(this.url)
-                             .then((response: ng.IHttpPromiseCallbackArg<IGitAccountResponseModel[]>) =>
-                                            response.data.map(acc => new GitAccount(acc.html_url,
-                                                                                    acc.login,
-                                                                                    acc.email,
-                                                                                    acc.avatar_url,
-                                                                                    acc.bio)));
-        }
-
-        getGitAccount(login: string): ng.IPromise<GitAccount> {
-            return this.$http.get(`${this.url}/${login}`)
-                             .then((response: ng.IHttpPromiseCallbackArg<IGitAccountResponseModel>) =>
-                                            new GitAccount(response.data.html_url,
-                                                           response.data.login,
-                                                           response.data.email,
-                                                           response.data.avatar_url,
-                                                           response.data.bio));
-        }
-    }
-
-    angular.module('app')
-           .service('gitService', GitService);
+export interface IGitService {
+    getGitAccounts(): ng.IPromise<GitAccount[]>;
+    getGitAccount(login: string): ng.IPromise<GitAccount>;
 }
+
+interface IGitAccountResponseModel {
+    login: string,
+    email: string,
+    html_url: string,
+    avatar_url: string,
+    bio: string
+}
+
+class GitService implements IGitService {
+
+    /* @ngInject */
+    constructor(private $http: ng.IHttpService, private $q: ng.IQService) { }
+
+    private url = 'https://api.github.com/users';
+
+    getGitAccounts() {
+        return this.$http.get(this.url).then((response: ng.IHttpPromiseCallbackArg<IGitAccountResponseModel[]>) =>
+                response.data.map(acc => new GitAccount(acc.html_url,
+                                                        acc.login,
+                                                        acc.email,
+                                                        acc.avatar_url,
+                                                        acc.bio)));
+    }
+
+    getGitAccount(login: string) {
+        return this.$http.get(`${this.url}/${login}`).then((response: ng.IHttpPromiseCallbackArg<IGitAccountResponseModel>) =>
+                new GitAccount(response.data.html_url,
+                               response.data.login,
+                               response.data.email,
+                               response.data.avatar_url,
+                               response.data.bio));
+    }
+}
+
+angular.module('app').service('gitService', GitService);
