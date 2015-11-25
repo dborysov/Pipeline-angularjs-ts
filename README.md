@@ -14,6 +14,7 @@
   - Sass
   - Inject
   - TemplateCache
+  - require-dir
 
 ##App description
 Application shows GitHub users on the main page and specific user data if you choose in the list or visit `/accounts/_login` url.
