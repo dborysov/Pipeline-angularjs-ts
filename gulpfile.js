@@ -1,19 +1,18 @@
 'use strict';
 
 const path = require('path'),
-    glob = require('glob'),
-    gulp = require('gulp'),
-    browserify = require('browserify'),
-    tsify = require('tsify'),
-    source = require('vinyl-source-stream'),
-    streamify = require('gulp-streamify'),
-    sourcemaps = require('gulp-sourcemaps'),
-    ngAnnotate = require('gulp-ng-annotate'),
-    bower = require('gulp-bower'),
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
-    sass = require('gulp-sass'),
-    inject = require('gulp-inject');
+      glob = require('glob'),
+      gulp = require('gulp'),
+      browserify = require('browserify'),
+      tsify = require('tsify'),
+      source = require('vinyl-source-stream'),
+      streamify = require('gulp-streamify'),
+      sourcemaps = require('gulp-sourcemaps'),
+      ngAnnotate = require('gulp-ng-annotate'),
+      bower = require('gulp-bower'),
+      uglify = require('gulp-uglify'),
+      sass = require('gulp-sass'),
+      inject = require('gulp-inject');
 
 const src = {
     ts: {
@@ -31,12 +30,9 @@ const src = {
     },
     css: {
         libs: ['./bower_components/bootstrap/dist/css/bootstrap.min.css'],
-        custom: []
     },
     sass: {
-        custom: [
-            './app/Content/Sass/+(*.sass|*.scss)'
-        ]
+        custom: ['./app/Content/Sass/+(*.sass|*.scss)']
     },
     html: {
         main: './app/index.html',
@@ -71,9 +67,9 @@ gulp.task('compile-js', () => {
 
 gulp.task('default', ['copy-html', 'bower-install', 'compile-js', 'compile-css'], () => {
     var sourceFiles = gulp.src(src.js.libs
-        .concat([path.join(dest, 'all.js')])
-        .concat(src.css.libs)
-        .concat([path.join(dest, 'css', '*.css')]), { read: false });
+                            .concat([path.join(dest, 'all.js')])
+                            .concat(src.css.libs)
+                            .concat([path.join(dest, 'css', '*.css')]), { read: false });
 
     return gulp.src(src.html.main)
         .pipe(inject(sourceFiles))
