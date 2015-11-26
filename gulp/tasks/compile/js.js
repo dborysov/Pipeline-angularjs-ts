@@ -23,6 +23,6 @@ gulp.task('compile-js', () => {
                 .pipe(streamify(sourcemaps.init({ loadMaps: true })))
                     .pipe(ngAnnotate())
                     .pipe(streamify(uglify()))
-                .pipe(streamify(sourcemaps.write()))
+                .pipe(streamify(sourcemaps.write('.')))
                 .pipe(gulp.dest(config.baseDir.dest))
 });

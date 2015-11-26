@@ -11,6 +11,7 @@ requireDir('./gulp/tasks', {recurse: true});
 gulp.task('default', ['inject-html'], () =>
     del([
         path.join(config.baseDir.dest, '**', '*'),
-        `!${path.join(config.baseDir.dest, config.fileNames.indexHtml)}`
+        `!${path.join(config.baseDir.dest, config.fileNames.indexHtml)}`,
+        `!${path.join(config.baseDir.dest, '**', '*.map')}`
     ])
 );

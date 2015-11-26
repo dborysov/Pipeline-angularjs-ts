@@ -1,9 +1,9 @@
 'use strict';
 
 const baseDir = {
-        dest: 'dist',
-        src: 'app'
-    },
+    dest: 'dist',
+    src: 'app'
+},
     folderNames = {
         bower: 'bower_components',
         outputCss: 'css',
@@ -17,46 +17,49 @@ const baseDir = {
     },
     moduleNames = {
         app: 'app'
+    },
+    htmlMinifyConfig = {
+        collapseWhitespace: true,
+        removeAttributeQuotes: true,
+        removeComments: true
     };
 
-    module.exports = {
-        baseDir,
-        folderNames,
-        fileNames,
-        moduleNames,
-        src: {
-            ts: {
-                customMainFiles: [
-                    `./${baseDir.src}/main.ts`,
-                    `./${baseDir.src}/{controllers,services}/${'*.ts'}`
-                ]
-            },
-            js: {
-                libs: [
-                    'angular/angular.min.js',
-                    'angular-ui-router/release/angular-ui-router.min.js'
-                ]
-            },
-            css: {
-                libs: ['bootstrap/dist/css/bootstrap.min.css'],
-            },
-            sass: {
-                custom: [`./${baseDir.src}/Content/Sass/+(*.sass|*.scss)`]
-            },
-            html: {
-                main: `./${baseDir.src}/index.html`,
-                partials: [`./${baseDir.src}/${folderNames.partials}/${'*.html'}`]
-            }
+module.exports = {
+    baseDir,
+    folderNames,
+    fileNames,
+    moduleNames,
+    htmlMinifyConfig,
+    src: {
+        ts: {
+            customMainFiles: [
+                `./${baseDir.src}/main.ts`,
+                `./${baseDir.src}/{controllers,services}/${'*.ts'}`
+            ]
         },
-        taskConfigs: {
-            compileTemplates: {
-                minify: {
-                        collapseWhitespace: true,
-                        removeAttributeQuotes: true
-                    },
-                moduleName: moduleNames.app,
-                output: fileNames.templatesJs,
-                strip: folderNames.partials
-            }
+        js: {
+            libs: [
+                'angular/angular.min.js',
+                'angular-ui-router/release/angular-ui-router.min.js'
+            ]
+        },
+        css: {
+            libs: ['bootstrap/dist/css/bootstrap.min.css'],
+        },
+        sass: {
+            custom: [`./${baseDir.src}/Content/Sass/+(*.sass|*.scss)`]
+        },
+        html: {
+            main: `./${baseDir.src}/index.html`,
+            partials: [`./${baseDir.src}/${folderNames.partials}/${'*.html'}`]
         }
-    };
+    },
+    taskConfigs: {
+        compileTemplates: {
+            minify: htmlMinifyConfig,
+            moduleName: moduleNames.app,
+            output: fileNames.templatesJs,
+            strip: folderNames.partials
+        }
+    }
+};
