@@ -4,12 +4,12 @@ import {IGitService} from '../services/GitService';
 import {GitAccount} from '../models/GitAccount';
 
 class AccountDetails {
-    private account: GitAccount;
+    private _account: GitAccount;
 
     /* @ngInject */
     constructor($stateParams: ng.ui.IStateParamsService, gitService: IGitService) {
         gitService.getGitAccount($stateParams['login'])
-                  .then(a => this.account = a);
+                  .then(account => this._account = account);
     }
 }
 

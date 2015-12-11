@@ -1,14 +1,10 @@
-<table class="table table-striped table-hover" ng-if="vm.results.length">
-    <thead>
-        <tr>
-            <th class="col-md-2">Avatar</th>
-            <th>Login</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="result in vm.results" ui-sref="index.details(result)">
-            <td><img width="50" ng-src="{{:: result.AvatarUrl}}" alt="avatar"></td>
-            <td>{{::result.Login}}</td>
-        </tr>
-    </tbody>
+<table class="table table-striped table-hover" ng-if="vm._results.length">
+    <tr>
+        <th class="col-md-2">Avatar</th>
+        <th>Login</th>
+    </tr>
+    <tr ng-repeat="result in vm._results" ui-sref="index.details({login: result.Login})">
+        <td><img width="50" ng-src="{{:: result.AvatarUrl}}" alt="avatar"></td>
+        <td>{{:: result.Login}}</td>
+    </tr>
 </table>

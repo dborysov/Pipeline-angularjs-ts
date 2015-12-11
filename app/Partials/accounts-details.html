@@ -1,9 +1,9 @@
-<div ng-if="vm.account">
+<div ng-if="vm._account">
     <button class="btn btn-default" ui-sref="index.accounts">Back</button>
     <br/>
     <p class="margin-std">
-        <img width="100" ng-src="{{:: vm.account.AvatarUrl}}" alt="avatar">
-        <a href="{{:: vm.account.HtmlUrl}}">{{:: vm.account.Login}}</a> ({{:: vm.account.Email}})
+        <img width="100" ng-src="{{:: vm._account.AvatarUrl}}" alt="avatar">
+        <a href="{{:: vm._account.HtmlUrl}}">{{:: vm._account.Login}}</a> ({{:: vm._account.Email}})
     </p>
-    <div>{{:: vm.account.Bio}}</div>
+    <div>{{:: vm._account.Bio}}</div>
 </div>

@@ -1,11 +1,8 @@
 {
     "compilerOptions": {
-        "target": "ES5",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
         "module": "commonjs",
-        "noImplicitAny": false
-    },
-    "exclude": [
-        "node_modules",
-        "bower_components"
-    ]
+        "target": "ES5"
+    }
 }

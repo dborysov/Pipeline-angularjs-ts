@@ -2,12 +2,12 @@ import {IGitService} from '../services/GitService';
 import {GitAccount} from '../models/GitAccount';
 
 class Main {
-    private results: GitAccount[];
+    private _results: GitAccount[];
 
     /* @ngInject */
-    constructor(private gitService: IGitService) {
+    constructor(gitService: IGitService) {
         gitService.getGitAccounts()
-                  .then(results => { this.results = results; });
+                  .then(results => { this._results = results; });
     }
 }
 

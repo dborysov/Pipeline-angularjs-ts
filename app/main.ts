@@ -9,22 +9,22 @@ class Config {
 
         $stateProvider
             .state('index', {
-                url: '',
                 abstract: true,
                 controller: 'Main',
                 controllerAs: 'vm',
-                template: '<ui-view/>'
+                template: '<ui-view/>',
+                url: '',
             })
             .state('index.accounts', {
+                templateProvider: /* @ngInject */ ($templateCache: ng.ITemplateCacheService) => $templateCache.get('/accounts-list.html'),
                 url: '/accounts',
-                templateProvider: /* @ngInject */ $templateCache => $templateCache.get('/accounts-list.html')
             })
             .state('index.details', {
-                url: '/accounts/:login',
-                templateProvider: /* @ngInject */ $templateCache => $templateCache.get('/accounts-details.html'),
                 controller: 'AccountDetails',
-                controllerAs: 'vm'
-            })
+                controllerAs: 'vm',
+                templateProvider: /* @ngInject */ ($templateCache: ng.ITemplateCacheService) => $templateCache.get('/accounts-details.html'),
+                url: '/accounts/:login',
+            });
     }
 }
 

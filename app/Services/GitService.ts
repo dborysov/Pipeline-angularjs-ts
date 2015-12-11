@@ -8,22 +8,27 @@ export interface IGitService {
 }
 
 interface IGitAccountResponseModel {
-    login: string,
-    email: string,
-    html_url: string,
-    avatar_url: string,
-    bio: string
+    avatar_url: string;
+    bio: string;
+    email: string;
+    html_url: string;
+    login: string;
 }
 
 class GitService implements IGitService {
+    private _$http: ng.IHttpService;
+    private _$q: ng.IQService;
 
     /* @ngInject */
-    constructor(private $http: ng.IHttpService, private $q: ng.IQService) { }
+    constructor($http: ng.IHttpService, $q: ng.IQService) {
+        this._$http = $http;
+        this._$q = $q;
+     }
 
     private url = 'https://api.github.com/users';
 
-    getGitAccounts() {
-        return this.$http.get(this.url).then((response: ng.IHttpPromiseCallbackArg<IGitAccountResponseModel[]>) =>
+    public getGitAccounts() {
+        return this._$http.get(this.url).then((response: ng.IHttpPromiseCallbackArg<IGitAccountResponseModel[]>) =>
                 response.data.map(acc => new GitAccount(acc.html_url,
                                                         acc.login,
                                                         acc.email,
@@ -31,8 +36,8 @@ class GitService implements IGitService {
                                                         acc.bio)));
     }
 
-    getGitAccount(login: string) {
-        return this.$http.get(`${this.url}/${login}`).then((response: ng.IHttpPromiseCallbackArg<IGitAccountResponseModel>) =>
+    public getGitAccount(login: string) {
+        return this._$http.get(`${this.url}/${login}`).then((response: ng.IHttpPromiseCallbackArg<IGitAccountResponseModel>) =>
                 new GitAccount(response.data.html_url,
                                response.data.login,
                                response.data.email,
