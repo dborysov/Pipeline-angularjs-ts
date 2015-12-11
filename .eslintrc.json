@@ -1,0 +1,13 @@
+{
+    "rules": {},
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "globals": {
+        "describe": false,
+        "it": false,
+        "expect": false
+    },
+    "extends": "eslint:recommended"
+}

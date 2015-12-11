@@ -1,9 +1,9 @@
 'use strict';
 
 const baseDir = {
-    dest: 'dist',
-    src: 'app'
-},
+        dest: 'dist',
+        src: 'app'
+    },
     folderNames = {
         bower: 'bower_components',
         outputCss: 'css',
@@ -44,7 +44,7 @@ module.exports = {
             ]
         },
         css: {
-            libs: ['bootstrap/dist/css/bootstrap.min.css'],
+            libs: ['bootstrap/dist/css/bootstrap.min.css']
         },
         sass: {
             custom: [`./${baseDir.src}/Content/Sass/+(*.sass|*.scss)`]

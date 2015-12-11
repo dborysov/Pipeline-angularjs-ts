@@ -1,11 +1,8 @@
 'use strict';
 
-const gulp = require('gulp'),
-      path = require('path'),
-      requireDir = require('require-dir'),
-      del = require('del'),
-      config = require('./gulp/config');
+const gulp = require('gulp');
+const requireDir = require('require-dir');
 
-requireDir('./gulp/tasks', {recurse: true});
+requireDir('./gulp/tasks', { recurse: true });
 
 gulp.task('default', ['inject-html']);
