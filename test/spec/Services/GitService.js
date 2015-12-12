@@ -1,4 +1,6 @@
 /// <reference path="../../../typings/jasmine/jasmine.d.ts" />
+/// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
+'use strict';
 
 describe('Git service', function () {
     var _GitService;
