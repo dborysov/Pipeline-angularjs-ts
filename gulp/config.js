@@ -1,4 +1,5 @@
 'use strict';
+
 const path = require('path');
 
 const baseDir = {
@@ -9,7 +10,8 @@ const folderNames = {
     bower: 'bower_components',
     outputCss: 'css',
     outputLibs: 'libs',
-    partials: 'partials'
+    partials: 'partials',
+    tests: 'tests'
 };
 const fileNames = {
     outputJs: 'all.js',
@@ -31,8 +33,9 @@ const src = {
             'angular/angular.min.js',
             'angular-ui-router/release/angular-ui-router.min.js'
         ],
-        testLibs: ['bower_components/angular-mocks/angular-mocks.js'],
-        testSpecs: ['test/spec/**/*.js']
+        unitTestLibs: [path.resolve('bower_components/angular-mocks/angular-mocks.js')],
+        unitTestSpecs: [path.resolve(folderNames.tests, 'unit/**/*.js')],
+        e2eSpecs: [path.resolve(folderNames.tests, 'e2e/**/*.js')]
     },
     css: {
         libs: ['bootstrap/dist/css/bootstrap.min.css']
@@ -45,13 +48,14 @@ const src = {
         partials: [`./${baseDir.src}/${folderNames.partials}/${'*.html'}`]
     },
     configs: {
-        karma: path.resolve('karma.conf.js')
+        karma: path.resolve(folderNames.tests, 'karma.conf.js'),
+        protractor: path.resolve(folderNames.tests, 'protractor.conf.js')
     },
-    get testFiles() {
-        const mainLibs = src.js.libs.map(lib => path.join(folderNames.bower, lib));
-        const customFiles = [fileNames.outputJs, fileNames.templatesJs].map(file => path.join(baseDir.dest, file));
-        const testLibs = src.js.testLibs;
-        const specs = src.js.testSpecs;
+    get unitTestFiles() {
+        const mainLibs = src.js.libs.map(lib => path.resolve(folderNames.bower, lib));
+        const customFiles = [fileNames.outputJs, fileNames.templatesJs].map(file => path.resolve(baseDir.dest, file));
+        const testLibs = src.js.unitTestLibs;
+        const specs = src.js.unitTestSpecs;
         return [
             ...mainLibs,
             ...customFiles,
@@ -72,6 +76,8 @@ const taskConfigs = {
         strip: folderNames.partials
     }
 };
+const rootPath = path.resolve(__dirname, '..');
+const rootUrl = 'http://localhost:801';
 
 module.exports = {
     baseDir,
@@ -79,5 +85,7 @@ module.exports = {
     fileNames,
     moduleNames,
     src,
-    taskConfigs
+    taskConfigs,
+    rootPath,
+    rootUrl
 };

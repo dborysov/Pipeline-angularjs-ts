@@ -2,8 +2,8 @@
 'use strict';
 
 const karma = require('karma');
-const config = require('../../config');
 const karmaParseConfig = require('karma/lib/config').parseConfig;
+const config = require('../../../config');
 
 module.exports = (testConfig, cb) => {
     const karmaConfig = karmaParseConfig(config.src.configs.karma, testConfig);

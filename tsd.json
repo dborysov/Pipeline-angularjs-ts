@@ -19,6 +19,12 @@
     },
     "jquery/jquery.d.ts": {
       "commit": "5a8fc5ee71701431e4fdbb80c506e3c13f85a9ff"
+    },
+    "selenium-webdriver/selenium-webdriver.d.ts": {
+      "commit": "56df28f76adb7c11c019282699afdc6e9b0a96f6"
+    },
+    "angular-protractor/angular-protractor.d.ts": {
+      "commit": "56df28f76adb7c11c019282699afdc6e9b0a96f6"
     }
   }
 }

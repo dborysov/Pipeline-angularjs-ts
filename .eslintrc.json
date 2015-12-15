@@ -11,7 +11,10 @@
         "expect": false,
         "beforeEach": false,
         "angular": false,
-        "jasmine": false
+        "jasmine": false,
+        "browser": false,
+        "element": false,
+        "by": false
     },
     "extends": "eslint:recommended"
 }

@@ -2,11 +2,11 @@
 
 const startTests = require('./startTests');
 const gulp = require('gulp');
-const config = require('../../config');
+const config = require('../../../config');
 
-gulp.task('test-ci', ['default'], cb => {
+gulp.task('unit-test-ci', ['default'], cb => {
     const karmaConfig = {
-        files: config.src.testFiles,
+        files: config.src.unitTestFiles,
         autoWatch: false,
         singleRun: true
     };
