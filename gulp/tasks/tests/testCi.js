@@ -1,18 +1,15 @@
-/* global process */
 'use strict';
 
+const startTests = require('./startTests');
 const gulp = require('gulp');
-const karma = require('karma');
 const config = require('../../config');
-const karmaParseConfig = require('karma/lib/config').parseConfig;
 
 gulp.task('test-ci', ['default'], cb => {
-    const karmaConfig = karmaParseConfig(config.src.configs.karma, { files: config.src.testFiles });
+    const karmaConfig = {
+        files: config.src.testFiles,
+        autoWatch: false,
+        singleRun: true
+    };
 
-    const server = new karma.Server(karmaConfig, exitCode => {
-        cb();
-        process.exit(exitCode);
-    });
-
-    server.start();
+    startTests(karmaConfig, cb);
 });
