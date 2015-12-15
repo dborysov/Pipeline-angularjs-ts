@@ -14,14 +14,7 @@ module.exports = function (config) {
 
 
         // list of files / patterns to load in the browser
-        files: [
-            'dist/libs/angular/angular.min.js',
-            'dist/libs/angular-ui-router/release/angular-ui-router.min.js',
-            'bower_components/angular-mocks/angular-mocks.js',
-            'dist/all.js',
-            'dist/templates.js',
-            'test/spec/**/*.js'
-        ],
+        files: null,
 
 
         // list of files to exclude

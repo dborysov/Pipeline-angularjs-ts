@@ -1,9 +1,9 @@
 'use strict';
 
 const baseDir = {
-        dest: 'dist',
-        src: 'app'
-    },
+    dest: 'dist',
+    src: 'app'
+},
     folderNames = {
         bower: 'bower_components',
         outputCss: 'css',
@@ -18,19 +18,7 @@ const baseDir = {
     moduleNames = {
         app: 'app'
     },
-    htmlMinifyConfig = {
-        collapseWhitespace: true,
-        removeAttributeQuotes: true,
-        removeComments: true
-    };
-
-module.exports = {
-    baseDir,
-    folderNames,
-    fileNames,
-    moduleNames,
-    htmlMinifyConfig,
-    src: {
+    src = {
         ts: {
             customMainFiles: [
                 `./${baseDir.src}/main.ts`,
@@ -41,7 +29,9 @@ module.exports = {
             libs: [
                 'angular/angular.min.js',
                 'angular-ui-router/release/angular-ui-router.min.js'
-            ]
+            ],
+            testLibs: ['bower_components/angular-mocks/angular-mocks.js'],
+            testSpecs: ['test/spec/**/*.js']
         },
         css: {
             libs: ['bootstrap/dist/css/bootstrap.min.css']
@@ -54,12 +44,24 @@ module.exports = {
             partials: [`./${baseDir.src}/${folderNames.partials}/${'*.html'}`]
         }
     },
-    taskConfigs: {
+    taskConfigs = {
         compileTemplates: {
-            minify: htmlMinifyConfig,
+            minify: {
+                collapseWhitespace: true,
+                removeAttributeQuotes: true,
+                removeComments: true
+            },
             moduleName: moduleNames.app,
             output: fileNames.templatesJs,
             strip: folderNames.partials
         }
-    }
+    };
+
+module.exports = {
+    baseDir,
+    folderNames,
+    fileNames,
+    moduleNames,
+    src,
+    taskConfigs
 };

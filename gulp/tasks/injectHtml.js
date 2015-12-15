@@ -15,6 +15,6 @@ gulp.task('inject-html', ['compile-js', 'compile-css', 'compile-templates', 'cop
 
     return gulp.src(config.src.html.main)
                .pipe(inject(sourceFiles, {ignorePath: `../${config.baseDir.dest}`, relative: true}))
-               .pipe(htmlmin(config.htmlMinifyConfig))
+               .pipe(htmlmin(config.taskConfigs.compileTemplates.minify))
                .pipe(gulp.dest(config.baseDir.dest));
 });
