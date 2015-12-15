@@ -3,8 +3,8 @@
 'use strict';
 
 describe('Main controller', function () {
-    var MainController;
-    var GitServiceMock;
+    var mainController;
+    var gitServiceMock;
     var $timeout;
     var response = [1, 2, 3];
 
@@ -12,28 +12,28 @@ describe('Main controller', function () {
 
     beforeEach(function () {
         inject(function ($controller, $q, _$timeout_) {
-            GitServiceMock = jasmine.createSpyObj('GitService', ['getGitAccounts']);
-            GitServiceMock.getGitAccounts.and.returnValue($q.when(response));
+            gitServiceMock = jasmine.createSpyObj('GitService', ['getGitAccounts']);
+            gitServiceMock.getGitAccounts.and.returnValue($q.when(response));
 
             $timeout = _$timeout_;
 
-            MainController = $controller('Main', {
-                gitService: GitServiceMock
+            mainController = $controller('Main', {
+                gitService: gitServiceMock
             });
         });
     });
 
     it('should be defined', function () {
-        expect(MainController).toBeDefined();
+        expect(mainController).toBeDefined();
     });
 
     it('should call getGitAccounts on controller initialization', function () {
-        expect(GitServiceMock.getGitAccounts).toHaveBeenCalled();
+        expect(gitServiceMock.getGitAccounts).toHaveBeenCalled();
     });
 
     it('should save git accounts to a variable', function () {
         $timeout.flush();
 
-        expect(MainController._results).toBe(response);
+        expect(mainController._results).toBe(response);
     })
 })

@@ -3,15 +3,17 @@
 'use strict';
 
 describe('Git service', function () {
-    var _GitService;
+    var GitService;
 
-    beforeEach(module('app'));
+    beforeEach(function () { module('app'); });
 
-    beforeEach(inject(function (_gitService_) {
-        _GitService = _gitService_;
-    }));
+    beforeEach(function () {
+        inject(function (_gitService_) {
+            GitService = _gitService_;
+        });
+    });
 
     it('should be defined', function () {
-        expect(_GitService).toBeDefined();
+        expect(GitService).toBeDefined();
     })
 })
