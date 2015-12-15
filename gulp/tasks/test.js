@@ -1,3 +1,4 @@
+/* global process */
 'use strict';
 
 const gulp = require('gulp');
@@ -12,7 +13,6 @@ gulp.task('test', ['default'], (cb) => {
 
     var server = new karma.Server(config, function (exitCode) {
         cb();
-        /*global process*/
         process.exit(exitCode);
     });
 

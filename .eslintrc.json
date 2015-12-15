@@ -10,7 +10,8 @@
         "inject": false,
         "expect": false,
         "beforeEach": false,
-        "angular": false
+        "angular": false,
+        "jasmine": false
     },
     "extends": "eslint:recommended"
 }

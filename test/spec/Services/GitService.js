@@ -11,7 +11,7 @@ describe('Git service', function () {
         _GitService = _gitService_;
     }));
 
-    it('should have Git service be defined', function () {
+    it('should be defined', function () {
         expect(_GitService).toBeDefined();
     })
 })
