@@ -2,4 +2,4 @@
 
 const gulp = require('gulp');
 
-gulp.task('test-ci', ['e2e', 'unit-test-ci']);
+gulp.task('test', ['e2e', 'unit-test-ci']);

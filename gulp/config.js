@@ -7,7 +7,7 @@ const baseDir = {
     src: 'app'
 };
 const folderNames = {
-    bower: 'bower_components',
+    nodeModules: 'node_modules',
     outputCss: 'css',
     outputLibs: 'libs',
     partials: 'partials',
@@ -33,7 +33,7 @@ const src = {
             'angular/angular.min.js',
             'angular-ui-router/release/angular-ui-router.min.js'
         ],
-        unitTestLibs: [path.resolve('bower_components/angular-mocks/angular-mocks.js')],
+        unitTestLibs: [path.resolve('node_modules/angular-mocks/angular-mocks.js')],
         unitTestSpecs: [path.resolve(folderNames.tests, 'unit/**/*.js')],
         e2eSpecs: [path.resolve(folderNames.tests, 'e2e/**/*.js')]
     },
@@ -52,7 +52,7 @@ const src = {
         protractor: path.resolve(folderNames.tests, 'protractor.conf.js')
     },
     get unitTestFiles() {
-        const mainLibs = src.js.libs.map(lib => path.resolve(folderNames.bower, lib));
+        const mainLibs = src.js.libs.map(lib => path.resolve(folderNames.nodeModules, lib));
         const customFiles = [fileNames.outputJs, fileNames.templatesJs].map(file => path.resolve(baseDir.dest, file));
         const testLibs = src.js.unitTestLibs;
         const specs = src.js.unitTestSpecs;
