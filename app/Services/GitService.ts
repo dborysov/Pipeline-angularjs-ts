@@ -1,5 +1,3 @@
-/// <reference path="../../typings/angularjs/angular" />
-
 import {GitAccount} from '../models/GitAccount';
 
 export interface IGitService {

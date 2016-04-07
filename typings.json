@@ -1,0 +1,13 @@
+{
+  "name": "levi9-pipeline-angularjs-ts",
+  "version": false,
+  "ambientDependencies": {
+    "angular": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular.d.ts#5a8fc5ee71701431e4fdbb80c506e3c13f85a9ff",
+    "angular-ui-router": "github:DefinitelyTyped/DefinitelyTyped/angular-ui-router/angular-ui-router.d.ts#ba424f7ee39717d51c17699a09ac8df312a7e9a1",
+    "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#5a8fc5ee71701431e4fdbb80c506e3c13f85a9ff",
+    "angular-mocks": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular-mocks.d.ts#5a8fc5ee71701431e4fdbb80c506e3c13f85a9ff",
+    "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#5a8fc5ee71701431e4fdbb80c506e3c13f85a9ff",
+    "selenium-webdriver": "github:DefinitelyTyped/DefinitelyTyped/selenium-webdriver/selenium-webdriver.d.ts#56df28f76adb7c11c019282699afdc6e9b0a96f6",
+    "angular-protractor": "github:DefinitelyTyped/DefinitelyTyped/angular-protractor/angular-protractor.d.ts#56df28f76adb7c11c019282699afdc6e9b0a96f6"
+  }
+}

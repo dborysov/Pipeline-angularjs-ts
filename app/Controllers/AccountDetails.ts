@@ -1,4 +1,6 @@
-/// <reference path="../../typings/angular-ui-router/angular-ui-router" />
+/// <reference path="../../typings/browser.d.ts" />
+
+
 
 import {IGitService} from '../services/GitService';
 import {GitAccount} from '../models/GitAccount';

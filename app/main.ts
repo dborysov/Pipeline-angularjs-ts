@@ -1,6 +1,3 @@
-/// <reference path="../typings/angularjs/angular" />
-/// <reference path="../typings/angular-ui-router/angular-ui-router" />
-
 class Config {
 
     /* @ngInject */
