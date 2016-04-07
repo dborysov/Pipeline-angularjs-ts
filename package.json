@@ -19,6 +19,7 @@
     "angular-ui-router": "1.0.0-alpha.4",
     "bootstrap": "3.3.6",
     "browserify": "13.0.0",
+    "cucumber": "0.10.1",
     "del": "2.2.0",
     "glob": "7.0.3",
     "gulp": "3.9.1",
